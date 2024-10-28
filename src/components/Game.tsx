@@ -2,7 +2,7 @@
 
 import { Screenshot } from "@prisma/client";
 import { Banner } from "./Banner";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
 import { Progress } from "@/components/ui/progress";
 import { randomNumberGenerator } from "@/lib/utils";
@@ -34,6 +34,7 @@ export default function Game({
     sessionKey: string;
 }) {
     const router = useRouter();
+    const animationFrameRef = useRef<number>();
 
     const generator = useMemo(
         () => randomNumberGenerator(sessionKey),
@@ -64,9 +65,33 @@ export default function Game({
 
     const [processing, setProcessing] = useState(false);
 
+    const moveBanner = () => {
+        setCurrentBanner((prev) => {
+            const newTop = prev.position.top + (generator() * 2 - 1) * 5;
+            const newLeft = prev.position.left + (generator() * 2 - 1) * 5;
+
+            const boundedTop = Math.max(0, Math.min(400, newTop));
+            const boundedLeft = Math.max(0, Math.min(700, newLeft));
+
+            return {
+                ...prev,
+                position: {
+                    top: boundedTop,
+                    left: boundedLeft,
+                },
+            };
+        });
+
+        animationFrameRef.current = requestAnimationFrame(moveBanner);
+    };
+
     const onResponded = async (accepted: boolean) => {
         if (processing) {
             return;
+        }
+
+        if (animationFrameRef.current) {
+            cancelAnimationFrame(animationFrameRef.current);
         }
 
         if (currentIndex === screenshots.length - 1) {
@@ -111,6 +136,8 @@ export default function Game({
             swapVariants: generator() < 0.5,
             language: generator() < 0.5 ? "en" : "de",
         });
+
+        animationFrameRef.current = requestAnimationFrame(moveBanner);
     };
 
     useEffect(() => {
@@ -147,6 +174,15 @@ export default function Game({
         language: "en",
     });
 
+    useEffect(() => {
+        animationFrameRef.current = requestAnimationFrame(moveBanner);
+        return () => {
+            if (animationFrameRef.current) {
+                cancelAnimationFrame(animationFrameRef.current);
+            }
+        };
+    }, []);
+
     return (
         <div>
             <div className="py-6 flex justify-between text-2xl">
@@ -167,7 +203,7 @@ export default function Game({
                 <Image
                     src={`/${currentScreenshot.path}`}
                     alt={`A screenshot of ${currentScreenshot.name}`}
-                    key={currentScreenshot.websiteUrl}
+                    key={currentScreenshot.websiteUrl}                    
                     className="rounded-xl border-2 border-gray-400 shadow-lg "
                     width={1280}
                     height={720}
@@ -177,6 +213,7 @@ export default function Game({
                         position: "absolute",
                         top: `${currentBanner.position.top}px`,
                         left: `${currentBanner.position.left}px`,
+                        transition: "all 0.1s ease-out",
                     }}
                 >
                     {currentBanner.show && (
