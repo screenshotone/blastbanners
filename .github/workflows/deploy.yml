@@ -1,0 +1,52 @@
+name: Deploy
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    Deploy:
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+
+        env:
+            DOCKER_BUILDKIT: 1
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Set up Ruby
+              uses: ruby/setup-ruby@v1
+              with:
+                  ruby-version: 3.2.2
+                  bundler-cache: true
+
+            - name: Install Kamal
+              run: |
+                  gem install kamal -v 2.2.2
+
+            - uses: webfactory/ssh-agent@v0.7.0
+              with:
+                  ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+            - name: Set up Docker Buildx
+              id: buildx
+              uses: docker/setup-buildx-action@v2
+
+            - name: Deploy with Kamal
+              env:
+                  DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+                  DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
+                  DOCKER_REGISTRY_SERVER: ${{ secrets.DOCKER_REGISTRY_SERVER }}
+                  LOKI_URL: ${{ secrets.LOKI_URL }}
+                  TARGET_HOST: ${{ secrets.TARGET_HOST }}
+              run: |
+                  echo "NEXT_PUBLIC_BASE_URL=https://blastbanners.com" >> .env
+                  echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+                  echo "SCREENSHOTONE_API_ACCESS_KEY=${{ secrets.SCREENSHOTONE_API_ACCESS_KEY }}" >> .env
+                  echo "SCREENSHOTONE_API_SECRET_KEY=${{ secrets.SCREENSHOTONE_API_SECRET_KEY }}" >> .env
+
+                  kamal deploy

@@ -1,0 +1,32 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
+}
+
+model GameSession {
+    id String @id @default(cuid())
+
+    sessionKey String @unique @map("session_key")
+
+    startedAt DateTime  @default(now()) @map("started_at")
+    endedAt   DateTime? @map("ended_at")
+
+    score Int? @map("score")
+
+    name        String? @map("name")
+    countryCode String? @map("country_code")
+    fingerprint String? @map("fingerprint")
+    ipHash      String? @map("ip_hash")
+}
+
+model Screenshot {
+    id String @id @default(cuid())
+
+    websiteUrl String @map("website_url")
+    path       String @map("path")
+    name       String @map("name")
+}
