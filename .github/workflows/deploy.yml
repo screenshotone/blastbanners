@@ -48,5 +48,6 @@ jobs:
                   echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
                   echo "SCREENSHOTONE_API_ACCESS_KEY=${{ secrets.SCREENSHOTONE_API_ACCESS_KEY }}" >> .env
                   echo "SCREENSHOTONE_API_SECRET_KEY=${{ secrets.SCREENSHOTONE_API_SECRET_KEY }}" >> .env
+                  echo "NEXT_PUBLIC_PIRSCH_CODE=${{ secrets.NEXT_PUBLIC_PIRSCH_CODE }}" >> .env
 
                   kamal deploy
