@@ -16,6 +16,9 @@ const geistMono = localFont({
 export const metadata: Metadata = {
     title: "BlastBanners.com",
     description: "A funny game where you blast banners on websites.",
+    icons: {
+        icon: `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50%" y="50%" font-size="80" text-anchor="middle" dominant-baseline="middle">💥</text></svg>`,
+    },
 };
 
 export const dynamic = "force-dynamic";
