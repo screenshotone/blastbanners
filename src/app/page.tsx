@@ -12,6 +12,7 @@ export default function IndexPage() {
                     alt="Putting a cookie banner in your website is weak."
                     width={442}
                     height={243}
+                    priority
                     className="rounded-lg shadow-lg absolute top-0 left-0 transform -rotate-3 -z-10"
                 />
                 <Image
@@ -19,12 +20,14 @@ export default function IndexPage() {
                     alt="I am a conformist."
                     width={441}
                     height={609}
+                    priority
                     className="rounded-lg shadow-lg absolute top-0 left-3/4 transform rotate-2 -z-10"
                 />
                 <Image
                     src="/tweets/simon_sarris.png"
                     alt="Can we stop this?"
                     width={296}
+                    priority
                     height={372}
                     className="rounded-lg shadow-lg absolute bottom-0 left-0 transform rotate-6"
                 />

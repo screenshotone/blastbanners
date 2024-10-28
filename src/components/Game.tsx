@@ -207,6 +207,7 @@ export default function Game({
                     className="rounded-xl border-2 border-gray-400 shadow-lg "
                     width={1280}
                     height={720}
+                    priority
                 />
                 <div
                     style={{
