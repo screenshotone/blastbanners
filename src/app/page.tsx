@@ -49,8 +49,8 @@ export default function IndexPage() {
                             banners will survive this purge!
                         </p>
                         <p>
-                            Declining cookie banners gives you a higher score than
-                            accepting them.
+                            Declining cookie banners gives you a higher score
+                            than accepting them.
                         </p>
                     </div>
                     <Button asChild size="lg">
