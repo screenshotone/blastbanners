@@ -1,5 +1,20 @@
 import { getGameSession, getTopResults } from "@/lib/game";
 import { cn, getFlagEmoji } from "@/lib/utils";
+import Link from "next/link";
+
+const getMedalEmoji = (index: number) => {
+    if (index == 0) {
+        return "🥇";
+    }
+    if (index == 1) {
+        return "🥈";
+    }
+    if (index == 2) {
+        return "🥉";
+    }
+
+    return "";
+};
 
 export default async function ResultsPage({
     searchParams,
@@ -21,21 +36,26 @@ export default async function ResultsPage({
 
     return (
         <div className="flex flex-col items-center justify-center h-screen">
-            <h1 className="text-4xl font-bold">Blast Banners 💥</h1>
+            <Link href="/" prefetch={false}>
+                <h1 className="text-4xl font-bold">Blast Banners 💥</h1>
+            </Link>
             <div className="w-[1280px] h-[720px] flex flex-col items-center justify-center">
                 <div className="flex flex-col gap-4">
-                    {sessions.map((session) => (
+                    {sessions.map((session, i) => (
                         <div
                             key={session.sessionKey}
                             className={cn(
-                                "bg-white text-xl font-bold flex justify-between items-center w-[400px] border-2 border-gray-400 rounded-xl shadow-lg p-4",
+                                "bg-white text-xl font-bold flex justify-between items-center w-[600px] border-2 border-gray-400 rounded-xl shadow-lg p-4",
                                 session.sessionKey ===
                                     highlightSession?.sessionKey
                                     ? "border-blue-400 shadow-blue-400 my-4"
                                     : ""
                             )}
                         >
-                            <div>
+                            <div className="min-w-[200px]">
+                                {getMedalEmoji(i)} {session.name}
+                            </div>
+                            <div className="text-sm text-gray-500">
                                 {session.endedAt && session.startedAt
                                     ? Math.round(
                                           (session.endedAt.getTime() -
