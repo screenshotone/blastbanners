@@ -56,7 +56,7 @@ export function Banner({
         isVisible && (
             <Card
                 className={cn(
-                    "max-w-[300px] transition-all duration-500",
+                    "max-w-[280px] md:max-w-[300px] transition-all duration-500 text-sm md:text-base",
                     isExploding && "scale-150 opacity-0",
                     !isVisible && "hidden"
                 )}

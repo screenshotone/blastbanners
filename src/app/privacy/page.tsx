@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function PrivacyPage() {
     return (
-        <div className="flex flex-col items-center justify-center h-screen">
-            <div className="bg-white p-6 rounded-lg shadow-md max-w-[500px] border-slate-600 border-2 space-y-4">
+        <div className="flex flex-col items-center justify-center md:h-screen">
+            <div className="mt-10 md:mt-0 bg-white p-6 rounded-lg shadow-md max-w-[300px] md:max-w-[500px] border-slate-600 border-2 space-y-4">
                 <h1 className="text-4xl font-bold">Privacy Policy</h1>
                 <p>
                     By accepting and starting the game, you accept the privacy
@@ -17,7 +17,7 @@ export default function PrivacyPage() {
                 <p>
                     2. Your country code is stored to show the country of the
                     player in the leaderboard.
-                </p>                    
+                </p>
                 <p>
                     3.{" "}
                     <Link

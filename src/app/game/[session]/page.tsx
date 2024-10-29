@@ -25,7 +25,7 @@ export default async function GamePage({
 
     return (
         <div className="flex flex-col items-center justify-center h-screen">
-            <h1 className="text-4xl font-bold">Blast Banners 💥</h1>
+            <h1 className="text-4xl font-bold mt-10 md:mt-0">Blast Banners 💥</h1>
             <div className="flex flex-col items-center justify-center">
                 <Game
                     sessionKey={gameSession.sessionKey}

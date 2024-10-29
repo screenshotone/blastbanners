@@ -185,7 +185,7 @@ export default function Game({
 
     return (
         <div>
-            <div className="py-6 flex justify-between text-2xl">
+            <div className="px-6 md:px-0 py-6 flex justify-between text-2xl">
                 <div className="font-bold text-blue-600">{score}</div>
                 <div
                     className={`font-bold ${
@@ -199,7 +199,7 @@ export default function Game({
                     {elapsedTime.toFixed(1)}
                 </div>
             </div>
-            <div className="relative">
+            <div className="relative px-6 md:px-0">
                 <Image
                     src={`/${currentScreenshot.path}`}
                     alt={`A screenshot of ${currentScreenshot.name}`}
@@ -215,6 +215,7 @@ export default function Game({
                         top: `${currentBanner.position.top}px`,
                         left: `${currentBanner.position.left}px`,
                         transition: "all 0.1s ease-out",
+                        zIndex: 10,
                     }}
                 >
                     {currentBanner.show && (
@@ -228,7 +229,7 @@ export default function Game({
                     )}
                 </div>
             </div>
-            <div className="py-6">
+            <div className="px-6 md:px-0 py-6">
                 <Progress value={progress} className="w-[100%]" />
             </div>
         </div>

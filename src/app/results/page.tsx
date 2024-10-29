@@ -37,50 +37,54 @@ export default async function ResultsPage({
 
     return (
         <>
-            <div className="flex flex-col items-center justify-center h-screen">
+            <div className="flex flex-col items-center justify-center md:h-screen">
                 <Link href="/" prefetch={false}>
-                    <h1 className="text-4xl font-bold">Blast Banners 💥</h1>
+                    <h1 className="mt-10 md:mt-0 text-4xl font-bold">
+                        Blast Banners 💥
+                    </h1>
                 </Link>
-                <div className="w-[1280px] h-[720px] flex flex-col items-center justify-center">
+                <div className="mt-10 md:mt-0 md:w-[1280px] md:h-[720px] flex flex-col items-center justify-center">
                     <div className="flex flex-col gap-4">
                         {sessions.map((session, i) => (
                             <div
                                 key={session.sessionKey}
                                 className={cn(
-                                    "bg-white text-xl font-bold flex justify-between items-center w-[600px] border-2 border-gray-400 rounded-xl shadow-lg p-4",
+                                    "bg-white text-xl font-bold flex flex-col gap-4 md:gap-4 md:flex-row justify-between md:items-center w-[300px] md:w-[600px] border-2 border-gray-400 rounded-xl shadow-lg p-4",
                                     session.sessionKey ===
                                         highlightSession?.sessionKey
                                         ? "border-blue-400 shadow-blue-400 my-4"
                                         : ""
                                 )}
                             >
-                                <div className="min-w-[200px]">
+                                <div className="min-w-[300px]">
                                     {getMedalEmoji(i)} {session.name}
                                 </div>
-                                <div className="text-sm text-gray-500">
-                                    {session.endedAt && session.startedAt
-                                        ? Math.round(
-                                              (session.endedAt.getTime() -
-                                                  session.startedAt.getTime()) /
-                                                  1000
-                                          )
-                                        : 0}{" "}
-                                    seconds
-                                </div>
-                                <div className="text-2xl text-blue-600">
-                                    {session.score}
-                                </div>
-                                <div>
-                                    {session.countryCode
-                                        ? getFlagEmoji(session.countryCode)
-                                        : "🔥"}
+                                <div className="grow justify-between flex flex-row items-center gap-10 md:gap-0">
+                                    <div className="text-sm text-gray-500">
+                                        {session.endedAt && session.startedAt
+                                            ? Math.round(
+                                                  (session.endedAt.getTime() -
+                                                      session.startedAt.getTime()) /
+                                                      1000
+                                              )
+                                            : 0}{" "}
+                                        seconds
+                                    </div>
+                                    <div className="text-2xl text-blue-600">
+                                        {session.score}
+                                    </div>
+                                    <div>
+                                        {session.countryCode
+                                            ? getFlagEmoji(session.countryCode)
+                                            : "🔥"}
+                                    </div>
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
-                <div className="absolute bottom-20 left-0 w-full">
-                    <p className="text-center">
+                <div className="mt-10 md:mt-0 md:absolute md:bottom-20 md:left-0 w-full">
+                    <p className="text-center text-sm md:text-base">
                         All screenshots are provided by{" "}
                         <Link
                             href="https://screenshotone.com"
