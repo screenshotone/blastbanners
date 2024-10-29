@@ -35,6 +35,9 @@ export default function Game({
 }) {
     const router = useRouter();
     const animationFrameRef = useRef<number>();
+    const lastFrameTimeRef = useRef<number>(0);
+    const fps = 30;
+    const frameInterval = 1000 / fps;
 
     const generator = useMemo(
         () => randomNumberGenerator(sessionKey),
@@ -65,22 +68,29 @@ export default function Game({
 
     const [processing, setProcessing] = useState(false);
 
-    const moveBanner = () => {
-        setCurrentBanner((prev) => {
-            const newTop = prev.position.top + (generator() * 2 - 1) * 5;
-            const newLeft = prev.position.left + (generator() * 2 - 1) * 5;
+    const moveBanner = (timestamp: number) => {
+        if (timestamp - lastFrameTimeRef.current >= frameInterval) {
+            setCurrentBanner((prev) => {
+                const jump = generator() < 0.25;
 
-            const boundedTop = Math.max(0, Math.min(400, newTop));
-            const boundedLeft = Math.max(0, Math.min(700, newLeft));
+                const newTop =
+                    prev.position.top + (jump ? 100 : generator() * 20) - 10;
+                const newLeft =
+                    prev.position.left + (jump ? 100 : generator() * 20) - 10;
 
-            return {
-                ...prev,
-                position: {
-                    top: boundedTop,
-                    left: boundedLeft,
-                },
-            };
-        });
+                const boundedTop = Math.max(0, Math.min(400, newTop));
+                const boundedLeft = Math.max(0, Math.min(700, newLeft));
+
+                return {
+                    ...prev,
+                    position: {
+                        top: boundedTop,
+                        left: boundedLeft,
+                    },
+                };
+            });
+            lastFrameTimeRef.current = timestamp;
+        }
 
         animationFrameRef.current = requestAnimationFrame(moveBanner);
     };
@@ -118,13 +128,25 @@ export default function Game({
 
         setCurrentIndex((currentIndex) => currentIndex + 1);
         setCurrentRoundStartedAt(new Date());
-        setResponses([
+        const updatedResponses = [
             ...responses,
             {
                 time: new Date().getTime() - currentRoundStartedAt.getTime(),
                 accepted,
             },
-        ]);
+        ];
+        setResponses(updatedResponses);
+
+        if (updatedResponses.length > 0) {
+            const totalScore = updatedResponses.reduce((s, response) => {
+                const baseScore = response.accepted ? 50 : 100;
+                const timeMultiplier = Math.max(0.8, 1 - response.time / 2000);
+
+                return s + baseScore * timeMultiplier;
+            }, 0);
+
+            setScore(totalScore);
+        }
 
         const randomTop = Math.floor(generator() * 400);
         const randomLeft = Math.floor(generator() * 700);
@@ -137,23 +159,9 @@ export default function Game({
             language: generator() < 0.5 ? "en" : "de",
         });
 
+        lastFrameTimeRef.current = performance.now();
         animationFrameRef.current = requestAnimationFrame(moveBanner);
     };
-
-    useEffect(() => {
-        if (responses.length === 0) {
-            return;
-        }
-
-        const totalScore = responses.reduce((s, response) => {
-            const baseScore = response.accepted ? 50 : 100;
-            const timeMultiplier = Math.max(0.8, 1 - response.time / 2000);
-
-            return s + baseScore * timeMultiplier;
-        }, 0);
-
-        setScore(totalScore);
-    }, [responses]);
 
     const [progress, setProgress] = useState(
         (currentIndex / screenshots.length) * 100
@@ -167,7 +175,7 @@ export default function Game({
     }, [currentIndex, screenshots]);
 
     const [currentBanner, setCurrentBanner] = useState<BannerOptions>({
-        position: { top: 28, left: 32 },
+        position: { top: 50, left: 40 },
         show: true,
         acceptedFirst: false,
         swapVariants: false,
@@ -175,6 +183,7 @@ export default function Game({
     });
 
     useEffect(() => {
+        lastFrameTimeRef.current = performance.now();
         animationFrameRef.current = requestAnimationFrame(moveBanner);
         return () => {
             if (animationFrameRef.current) {
