@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { StartGameButton } from "@/components/StartGameButton";
 
 export default function IndexPage() {
     return (
@@ -53,9 +53,17 @@ export default function IndexPage() {
                             than accepting them.
                         </p>
                     </div>
-                    <Button asChild size="lg" className="text-xl font-bold p-6">
-                        <Link href="/game/new">Accept</Link>
-                    </Button>
+                    <StartGameButton />
+                    <p className="text-sm mt-6">
+                        By starting the game, you accept the BlastBanners.com {" "}
+                        <Link
+                            className="underline hover:no-underline"
+                            href="/privacy"
+                        >
+                            Privacy Policy
+                        </Link>
+                        .
+                    </p>
                 </div>
             </div>
         </div>

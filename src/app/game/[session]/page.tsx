@@ -1,6 +1,6 @@
 import Game from "@/components/Game";
 import { db } from "@/lib/db";
-import { getGameSession } from "@/lib/game";
+import { getActiveGameSession } from "@/lib/game";
 import { randomNumberGenerator } from "@/lib/utils";
 import { notFound } from "next/navigation";
 
@@ -13,7 +13,7 @@ export default async function GamePage({
 }) {
     const { session } = params;
 
-    const gameSession = await getGameSession(session);
+    const gameSession = await getActiveGameSession(session);
     if (!gameSession) {
         return notFound();
     }

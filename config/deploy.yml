@@ -20,6 +20,7 @@ volumes:
     - data:/app/data:rw
 
 proxy:
+    forward_headers: false
     healthcheck:
         interval: 3
         path: /health
