@@ -77,6 +77,27 @@ export default async function ResultsPage({
                     ))}
                 </div>
             </div>
+            <div className="absolute bottom-20 left-0 w-full">
+                <p className="text-center">
+                    All screenshots are provided by{" "}
+                    <Link
+                        href="https://screenshotone.com"
+                        prefetch={false}
+                        className="underline hover:no-underline"
+                    >
+                        ScreenshotOne
+                    </Link>
+                    , and the code is{" "}
+                    <Link
+                        href="https://github.com/screenshotone/blastbanners"
+                        prefetch={false}
+                        className="underline hover:no-underline"
+                    >
+                        open source
+                    </Link>
+                    .
+                </p>
+            </div>
         </div>
     );
 }

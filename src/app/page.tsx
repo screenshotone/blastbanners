@@ -55,7 +55,7 @@ export default function IndexPage() {
                     </div>
                     <StartGameButton />
                     <p className="text-sm mt-6">
-                        By starting the game, you accept the BlastBanners.com {" "}
+                        By starting the game, you accept the BlastBanners.com{" "}
                         <Link
                             className="underline hover:no-underline"
                             href="/privacy"
@@ -65,6 +65,27 @@ export default function IndexPage() {
                         .
                     </p>
                 </div>
+            </div>
+            <div className="absolute bottom-20 left-1/2 w-full">
+                <p>
+                    All screenshots are provided by{" "}
+                    <Link
+                        href="https://screenshotone.com"
+                        prefetch={false}
+                        className="underline hover:no-underline"
+                    >
+                        ScreenshotOne
+                    </Link>
+                    , and the code is{" "}
+                    <Link
+                        href="https://github.com/screenshotone/blastbanners"
+                        prefetch={false}
+                        className="underline hover:no-underline"
+                    >
+                        open source
+                    </Link>
+                    .
+                </p>
             </div>
         </div>
     );
