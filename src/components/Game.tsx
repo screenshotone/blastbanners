@@ -186,14 +186,14 @@ export default function Game({
     return (
         <div>
             <div className="py-6 flex justify-between text-2xl">
-                <div className="font-bold text-blue-400">{score}</div>
+                <div className="font-bold text-blue-600">{score}</div>
                 <div
                     className={`font-bold ${
                         elapsedTime < 10
-                            ? "text-green-400"
+                            ? "text-green-600"
                             : elapsedTime < 20
-                            ? "text-orange-400"
-                            : "text-red-400 animate-pulse"
+                            ? "text-orange-600"
+                            : "text-red-600 animate-pulse"
                     }`}
                 >
                     {elapsedTime.toFixed(1)}
