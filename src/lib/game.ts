@@ -30,7 +30,7 @@ export async function getTopResults() {
     return db.gameSession.findMany({
         where: { endedAt: { not: null } },
         orderBy: { score: "desc" },
-        take: 10,
+        take: 5,
     });
 }
 
