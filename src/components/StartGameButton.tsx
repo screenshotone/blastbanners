@@ -13,7 +13,12 @@ export function StartGameButton() {
             size="lg"
             className="text-xl font-bold p-6"
             onClick={async () => {
-                await hit();
+                try {
+                    await hit();                    
+                } catch (error) {
+                    console.error(error);
+                }
+                
                 router.push("/game/new");
             }}
         >
