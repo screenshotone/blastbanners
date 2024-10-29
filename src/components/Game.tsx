@@ -86,12 +86,12 @@ export default function Game({
     };
 
     const onResponded = async (accepted: boolean) => {
-        if (processing) {
-            return;
-        }
-
         if (animationFrameRef.current) {
             cancelAnimationFrame(animationFrameRef.current);
+        }
+
+        if (processing) {
+            return;
         }
 
         if (currentIndex === screenshots.length - 1) {
@@ -203,7 +203,7 @@ export default function Game({
                 <Image
                     src={`/${currentScreenshot.path}`}
                     alt={`A screenshot of ${currentScreenshot.name}`}
-                    key={currentScreenshot.websiteUrl}                    
+                    key={currentScreenshot.websiteUrl}
                     className="rounded-xl border-2 border-gray-400 shadow-lg "
                     width={1280}
                     height={720}
