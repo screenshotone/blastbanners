@@ -28,7 +28,7 @@ export default async function ResultsPage({
                         <div
                             key={session.sessionKey}
                             className={cn(
-                                "text-xl font-bold flex justify-between items-center w-[400px] border-2 border-gray-400 rounded-xl shadow-lg p-4",
+                                "bg-white text-xl font-bold flex justify-between items-center w-[400px] border-2 border-gray-400 rounded-xl shadow-lg p-4",
                                 session.sessionKey ===
                                     highlightSession?.sessionKey
                                     ? "border-blue-400 shadow-blue-400 my-4"
@@ -45,7 +45,7 @@ export default async function ResultsPage({
                                     : 0}{" "}
                                 seconds
                             </div>
-                            <div className="text-2xl text-blue-400">
+                            <div className="text-2xl text-blue-600">
                                 {session.score}
                             </div>
                             <div>
