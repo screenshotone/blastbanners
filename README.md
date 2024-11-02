@@ -7,3 +7,11 @@ The game is built with [Next.js](https://nextjs.org), [Tailwind CSS](https://tai
 It uses [ScreenshotOne API](https://screenshotone.com) to render screenshots of the websites.
 
 [![Blast Banners](https://img.youtube.com/vi/sPjDyzpyNwM/maxresdefault.jpg)](https://www.youtube.com/watch?v=sPjDyzpyNwM)
+
+## Lessons Learned
+
+1. [Deploy Next.js (Prisma/SQLite) with Kamal 2 and GitHub Actions](https://scalabledeveloper.com/posts/deploy-nextjs-sqlite-with-kamal-and-github-actions/).
+
+## License
+
+The code is licensed [under the MIT license](./LICENSE).
