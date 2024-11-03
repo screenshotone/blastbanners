@@ -11,7 +11,7 @@ It uses [ScreenshotOne API](https://screenshotone.com) to render screenshots of 
 ## Lessons Learned
 
 1. [Deploy Next.js (Prisma/SQLite) with Kamal 2 and GitHub Actions](https://scalabledeveloper.com/posts/deploy-nextjs-sqlite-with-kamal-and-github-actions/).
-2. [Using an emoji as a website favicon](https://scalabledeveloper.com/posts/emoji-favicon/).
+2. [Using emojis as website favicons](https://scalabledeveloper.com/posts/emoji-favicon/).
 
 ## License
 
