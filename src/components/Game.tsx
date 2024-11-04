@@ -104,7 +104,7 @@ export default function Game({
             return;
         }
 
-        if (currentIndex === screenshots.length - 1) {
+        if (currentIndex >= screenshots.length - 1) {
             setProcessing(true);
 
             const response = await fetch(`/game/${sessionKey}/end`, {
@@ -126,7 +126,7 @@ export default function Game({
             return;
         }
 
-        setCurrentIndex((currentIndex) => currentIndex + 1);
+        setCurrentIndex((currentIndex) => Math.min(currentIndex + 1, screenshots.length - 1));
         setCurrentRoundStartedAt(new Date());
         const updatedResponses = [
             ...responses,
@@ -167,10 +167,10 @@ export default function Game({
         (currentIndex / screenshots.length) * 100
     );
     const [currentScreenshot, setCurrentScreenshot] = useState<Screenshot>(
-        screenshots[currentIndex]
+        screenshots[Math.min(currentIndex, screenshots.length - 1)]
     );
     useEffect(() => {
-        setCurrentScreenshot(screenshots[currentIndex]);
+        setCurrentScreenshot(screenshots[Math.min(currentIndex, screenshots.length - 1)]);
         setProgress((currentIndex / screenshots.length) * 100);
     }, [currentIndex, screenshots]);
 
