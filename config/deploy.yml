@@ -20,6 +20,8 @@ volumes:
     - data:/app/data:rw
 
 proxy:
+    host: blastbanners.com
+    ssl: true
     forward_headers: false
     healthcheck:
         interval: 3
