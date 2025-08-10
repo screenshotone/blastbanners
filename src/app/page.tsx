@@ -86,6 +86,16 @@ export default function IndexPage() {
                     >
                         open source
                     </Link>
+                    . <br />
+                    If you occasionally want to render website screenshots,
+                    check out{" "}
+                    <Link
+                        href="https://takescreenshot.app"
+                        prefetch={false}
+                        className="underline hover:no-underline"
+                    >
+                        Takescreenshot.app
+                    </Link>
                     .
                 </p>
             </div>
