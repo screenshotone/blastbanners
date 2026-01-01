@@ -1,6 +1,6 @@
-FROM node:22-alpine AS base
+FROM node:22-alpine3.19 AS base
 
-RUN apk add --no-cache dumb-init
+RUN apk add --no-cache dumb-init openssl
 
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
